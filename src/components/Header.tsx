@@ -18,7 +18,7 @@ const Header = () => {
               <div className="flex">
                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -49,16 +49,21 @@ const Header = () => {
                       key={link.href}
                       buttonText={link.name}
                       url={link.href}
-                      style="inline-flex items-center border-b-4 rounded-none border-transparent hover:border-orange"
+                      style="inline-flex items-center border-b-4 rounded-none border-transparent hover:border-black"
                     />
                   ))}
                 </div>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center space-x-5">
                 <Cta
-                  buttonText="Order Online"
+                  buttonText="Link 1"
                   url="#"
-                  style="text-white bg-orange shadow-md"
+                  style="text-white bg-black shadow-md"
+                />
+                <Cta
+                  buttonText="Link 2"
+                  url="#"
+                  style="text-white bg-gray-600 shadow-md"
                 />
               </div>
             </div>

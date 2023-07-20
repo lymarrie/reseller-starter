@@ -57,10 +57,6 @@ export const config: TemplateConfig = {
       "geocodedCoordinate",
       "services",
       "photoGallery",
-      "dm_directoryParents.name",
-      "dm_directoryParents.slug",
-      "dm_directoryParents.meta",
-      "dm_directoryParents.c_addressRegionDisplayName",
     ],
     // The entity language profiles that documents will be generated for.
     localization: {
@@ -94,7 +90,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
  * a new deploy.
  */
 export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
-  return [`index-old/${document.locale}/${document.id.toString()}`];
+  return [`${document.slug}/alias`];
 };
 
 /**
@@ -105,6 +101,7 @@ export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
  */
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
+  relativePrefixToRoot
 }): HeadConfig => {
   return {
     title: document.name,
@@ -123,7 +120,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         attributes: {
           rel: "icon",
           type: "image/x-icon",
-          href: Favicon,
+          href: relativePrefixToRoot + Favicon,
         },
       },
     ],
@@ -138,15 +135,12 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
  * exported function.
  */
 export const transformProps: TransformProps<any> = async (data) => {
-  const { dm_directoryParents, name } = data.document;
-
-  (dm_directoryParents || []).push({ name: name, slug: "" });
-
+  let transformPropsField = "This field was added during the transformProps function."
   return {
     ...data,
     document: {
       ...data.document,
-      dm_directoryParents: dm_directoryParents,
+      transformPropsField: transformPropsField,
     },
   };
 };
@@ -161,6 +155,7 @@ export const transformProps: TransformProps<any> = async (data) => {
  * them in the src/templates folder as this is specific for true template files).
  */
 const Location: Template<TemplateRenderProps> = ({
+  __meta,
   relativePrefixToRoot,
   document,
 }) => {
@@ -171,8 +166,7 @@ const Location: Template<TemplateRenderProps> = ({
     mainPhone,
     services,
     description,
-    siteDomain,
-    dm_directoryParents,
+    transformPropsField
   } = document;
 
   return (
@@ -180,10 +174,6 @@ const Location: Template<TemplateRenderProps> = ({
       <PageLayout>
         <Banner name={name} address={address} />
         <div className="centered-container">
-          <BreadCrumbs
-            breadcrumbs={dm_directoryParents}
-            baseUrl={relativePrefixToRoot}
-          />
           <div className="grid gap-x-10 gap-y-10 md:grid-cols-2">
             <Details address={address} phone={mainPhone} services={services} />
             {hours && <Hours title={"Restaurant Hours"} hours={hours} />}
@@ -192,7 +182,7 @@ const Location: Template<TemplateRenderProps> = ({
         </div>
       </PageLayout>
       {/* This component displays a link to the entity that represents the given page in the Knowledge Graph*/}
-      {!isProduction(siteDomain) && <EditTool data={document} />}
+      {/* {!isProduction(siteDomain) && <EditTool data={document} />} */}
     </>
   );
 };
