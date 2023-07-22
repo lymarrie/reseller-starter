@@ -16,12 +16,12 @@ import Favicon from "../assets/images/yext-favicon.ico";
  
  
  export const config: TemplateConfig = {
-   name: "Index Page",
+   name: "About Page",
  };
  
  
   export const getPath: GetPath<TemplateProps> = ({document}) => {
-    return `index.html`;
+    return `about`;
  };
  
  export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
@@ -29,7 +29,7 @@ import Favicon from "../assets/images/yext-favicon.ico";
     document
   }): HeadConfig => {
   return {
-    title: "Home Page",
+    title: "About Page",
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
@@ -51,7 +51,7 @@ import Favicon from "../assets/images/yext-favicon.ico";
   };
 };
 
-  const Index: Template<TemplateRenderProps> = ({relativePrefixToRoot, path, document}) => {
+  const About: Template<TemplateRenderProps> = ({relativePrefixToRoot, path, document}) => {
   const {
     _site, 
   } = document;
@@ -59,7 +59,7 @@ import Favicon from "../assets/images/yext-favicon.ico";
    return (
     <>
       <PageLayout >
-        <Banner name="Home Page" />
+        <Banner name="About Page" />
         <div className="centered-container">
           <div className="section space-y-10 px-10 text-xl">
               <h1 className="text-center font-semibold">Welcome to Yext Pages!</h1>
@@ -73,5 +73,5 @@ import Favicon from "../assets/images/yext-favicon.ico";
    );
  };
  
- export default Index;
+ export default About;
  

@@ -40,7 +40,7 @@ export const config: TemplateConfig = {
     // Defines the scope of entities that qualify for this stream.
     // You can use entityTypes, savedFilterIds, and/or entityIds
     filter: {
-      entityTypes: ["location"],
+      entityIds: ["test-location"],
     },
     // Specifies the exact data that each generated document will contain.
     // This data is passed in directly as props to the default exported function.
@@ -90,7 +90,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
  * a new deploy.
  */
 export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
-  return [`${document.slug}/alias`];
+  return [`alias`];
 };
 
 /**
