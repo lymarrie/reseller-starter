@@ -16,7 +16,7 @@ import Favicon from "../assets/images/yext-favicon.ico";
  
  
  export const config: TemplateConfig = {
-   name: "About Page",
+   name: "About",
  };
  
  
