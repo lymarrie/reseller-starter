@@ -19,8 +19,19 @@ const navigation = [
 
 const Header = ({ data }: HeaderProps) => {
 
-  const phone = data.mainPhone;
-  const email = data.emails[0];
+  let phone, email;
+
+  if (data.mainPhone) { 
+    phone = data.mainPhone;
+  } else {
+    phone = "+12345678910";
+  };
+
+  if (data.emails) {
+    email = data.emails[0];
+  } else {
+    email = "test@yext.com";
+  }
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

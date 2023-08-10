@@ -151,7 +151,7 @@ const Location: Template<TemplateRenderProps> = ({
   return (
     <>
       <PageLayout data={data}>
-        <Banner name={name} photo={photoGallery[0]} />
+        <Banner name={name} photo={photoGallery} />
         <About description={description} />
         {hours && <Hours title={"Hours of Operation"} hours={hours} />}
         <Carousel title={"Gallery"} photoGallery={photoGallery}></Carousel>
