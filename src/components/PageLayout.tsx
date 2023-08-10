@@ -4,15 +4,15 @@ import Footer from "./Footer";
 
 export interface PageLayoutProps {
   children?: React.ReactNode;
-  _site?: any;
+  data?: any;
 }
 
-const PageLayout = ({ children, _site }: PageLayoutProps) => {
+const PageLayout = ({ children, data }: PageLayoutProps) => {
   return (
     <div className="min-h-screen">
-      <Header _site={_site} />
+      <Header data={data}/>
       {children}
-      <Footer _site={_site} />
+      <Footer />
     </div>
   );
 };

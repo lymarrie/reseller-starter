@@ -1,17 +1,21 @@
 import * as React from "react";
 
 export interface AboutProps {
-  name?: string;
   description?: string;
 }
 
-const About = ({ name, description }: AboutProps) => {
-  const about = name === null ? "About" : `About ${name}`;
+const About = ({ description }: AboutProps) => {
   return (
     <>
-      <div className="border-b border-gray-300 bg-gray-100 shadow-md rounded-lg p-2 px-4 py-5 sm:p-6">
-        <div className="text-xl font-semibold">{about}</div>
-        {description && <p className="pt-4">{description}</p>}
+      <div className="bg-gray-100 px-6 py-20 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+            <a id="about">About Us</a>
+          </h2>
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            {description}
+          </p>
+        </div>
       </div>
     </>
   );

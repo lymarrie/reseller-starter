@@ -1,55 +1,40 @@
 import * as React from "react";
 import { Address } from "../types/Address";
 import Cta from "./Cta";
+import { Image } from "@yext/react-components";
 
 export interface BannerProps {
   name?: string;
-  address?: Address;
+  paragraph?: string;
+  photo?: any;
 }
 
-const renderPrettyAddress = (address?: Address) => {
-  return (
-    <>
-      {address && (
-        <span>
-          {address.line1} in {address.city}, {address.region}
-        </span>
-      )}
-    </>
-  );
-};
-
-const Banner = (props: BannerProps) => {
-  const { name, address } = props;
+const Banner = ({ name, paragraph, photo }: BannerProps) => {
 
   return (
     <>
-      <div
-        className={`relative z-10 w-full bg-cover bg-center h-96 bg-[url(/src/assets/images/yext-banner.png)] `}
-      >
-        <div className="absolute left-0 right-0 flex flex-col items-center">
-          <div className="w-96 my-8 rounded-xl text-black bg-gray-300 border-8 shadow-xl border-white px-4 py-2 text-center">
-            <div>
-              <h1 className=" text-3xl font-semibold">{name}</h1>
-              <p className="text-lg pt-2  font-semibold">
-                {renderPrettyAddress(address)}
-              </p>
-            </div>
-            <div className="flex py-3 justify-between">
-              {/* <Cta
-                buttonText="Order Pickup"
-                url="#"
-                style="text-orange bg-white"
-              ></Cta>
-              <Cta
-                buttonText="Order Delivery"
-                url="#"
-                style="text-orange bg-white"
-              ></Cta> */}
-            </div>
-          </div>
+
+      {/* Option 1 */}
+      <div className="relative bg-gray-800 h-96">
+        <Image image={photo} className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center mx-auto max-w-2xl text-center">
+          <h2 className="text-4xl font-bold tracking-normal text-white sm:text-6xl">{name}</h2>
+          <p className="mt-6 text-lg leading-8 text-gray-100 tracking-wide">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
         </div>
       </div>
+
+      {/* Option 2 */}
+      {/* <div className="bg-gray-900 px-6 py-24 sm:py-32 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">{name}</h2>
+          <p className="mt-6 text-lg leading-8 text-gray-300">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+      </div> */}
     </>
   );
 };

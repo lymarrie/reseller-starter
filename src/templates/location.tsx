@@ -23,20 +23,25 @@ import {
 import { isProduction } from "@yext/pages/util";
 import "../index.css";
 import Favicon from "../assets/images/yext-favicon.ico";
+import BannerImage from "../assets/images/yext-banner.png";
 import About from "../components/About";
 import Banner from "../components/Banner";
+import Carousel from "../components/Carousel";
+import ContactSection from "../components/ContactSection";
 import Details from "../components/Details";
 import Hours from "../components/Hours";
 import PageLayout from "../components/PageLayout";
 import EditTool from "../components/EditTool";
-import BreadCrumbs from "../components/Breadcrumbs";
+
+import { Image } from "@yext/react-components";
+
 
 /**
  * Required when Knowledge Graph data is used for a template.
  */
 export const config: TemplateConfig = {
   stream: {
-    $id: "location-stream",
+    $id: "Location",
     // Defines the scope of entities that qualify for this stream.
     // You can use entityTypes, savedFilterIds, and/or entityIds
     filter: {
@@ -54,9 +59,10 @@ export const config: TemplateConfig = {
       "description",
       "hours",
       "slug",
-      "geocodedCoordinate",
       "services",
       "photoGallery",
+      "paymentOptions",
+      "emails",
     ],
     // The entity language profiles that documents will be generated for.
     localization: {
@@ -76,22 +82,9 @@ export const config: TemplateConfig = {
  * and ensure that each entity has the slug field pouplated.
  */
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return document.slug
-    ? document.slug
-    : `${document.locale}/${document.address.region}/${document.address.city}/${
-        document.address.line1
-      }-${document.id.toString()}`;
+  return document.slug;
 };
 
-/**
- * Defines a list of paths which will redirect to the path created by getPath.
- *
- * NOTE: This currently has no impact on the local dev path. Redirects will be setup on
- * a new deploy.
- */
-export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
-  return [`alias`];
-};
 
 /**
  * This allows the user to define a function which will take in their template
@@ -127,23 +120,6 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   };
 };
 
-/**
- * Required only when data needs to be retrieved from an external (non-Knowledge Graph) source.
- * If the page is truly static this function is not necessary.
- *
- * This function will be run during generation and pass in directly as props to the default
- * exported function.
- */
-export const transformProps: TransformProps<any> = async (data) => {
-  let transformPropsField = "This field was added during the transformProps function."
-  return {
-    ...data,
-    document: {
-      ...data.document,
-      transformPropsField: transformPropsField,
-    },
-  };
-};
 
 /**
  * This is the main template. It can have any name as long as it's the default export.
@@ -166,23 +142,20 @@ const Location: Template<TemplateRenderProps> = ({
     mainPhone,
     services,
     description,
-    transformPropsField
+    emails,
+    photoGallery
   } = document;
+
+  const data = { mainPhone, emails }
 
   return (
     <>
-      <PageLayout>
-        <Banner name={name} address={address} />
-        <div className="centered-container">
-          <div className="grid gap-x-10 gap-y-10 md:grid-cols-2">
-            <Details address={address} phone={mainPhone} services={services} />
-            {hours && <Hours title={"Restaurant Hours"} hours={hours} />}
-            {description && <About name={name} description={description} />}
-          </div>
-        </div>
+      <PageLayout data={data}>
+        <Banner name={name} photo={photoGallery[0]} />
+        <About description={description} />
+        {hours && <Hours title={"Hours of Operation"} hours={hours} />}
+        <Carousel title={"Gallery"} photoGallery={photoGallery}></Carousel>
       </PageLayout>
-      {/* This component displays a link to the entity that represents the given page in the Knowledge Graph*/}
-      {/* {!isProduction(siteDomain) && <EditTool data={document} />} */}
     </>
   );
 };

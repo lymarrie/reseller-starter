@@ -1,5 +1,6 @@
 import * as React from "react";
 
+
 export interface HoursProps {
   title?: string;
   hours: Week;
@@ -24,6 +25,12 @@ type Day = {
 type OpenIntervals = {
   start: string;
   end: string;
+};
+
+type DayRow = {
+  dayName: string;
+  day: Day;
+  isToday?: boolean;
 };
 
 const todayIndex = new Date().getDay();
@@ -97,7 +104,7 @@ function convertTo12HourFormat(time: string, includeMeridiem: boolean): string {
   const timeParts = time.split(":");
   let hour = Number(timeParts[0]);
   const minutesString = timeParts[1];
-  const meridiem = hour < 12 || hour === 24 ? "AM" : "PM"; // Set AM/PM
+  const meridiem = hour < 12 || hour === 24 ? " AM" : " PM"; // Set AM/PM
   hour = hour % 12 || 12; // Adjust hours
 
   return (
@@ -105,22 +112,16 @@ function convertTo12HourFormat(time: string, includeMeridiem: boolean): string {
   );
 }
 
-type DayRow = {
-  dayName: string;
-  day: Day;
-  isToday?: boolean;
-};
-
 const DayRow = (props: DayRow) => {
   const { dayName, day, isToday } = props;
 
   return (
-    <tr className={isToday ? "bg-gray-200 font-bold" : ""}>
-      <td className="capitalize text-left pl-1 pr-4">
+    <tr className={isToday ? "bg-blue-50 font-bold tracking-tight h-10" : "tracking-tight h-10"}>
+      <td className="capitalize pr-8 text-lg tracking-tight ">
         <span>{dayName}</span>
       </td>
       {!day.isClosed && (
-        <td className="pr-1">
+        <td className="text-lg tracking-tight ">
           <span>
             {convertTo12HourFormat(day.openIntervals[0].start, true)} -{" "}
             {convertTo12HourFormat(day.openIntervals[0].end, true)}
@@ -128,7 +129,7 @@ const DayRow = (props: DayRow) => {
         </td>
       )}
       {day.isClosed && (
-        <td className="pr-1">
+        <td className="text-lg tracking-tight ">
           <span>Closed</span>
         </td>
       )}
@@ -141,9 +142,11 @@ const Hours = (props: HoursProps) => {
 
   return (
     <>
-      <div className="border-b border-gray-300 bg-gray-100 shadow-md rounded-lg p-2 px-4 py-5 sm:p-6">
-        <div className="text-xl font-semibold mb-4">{title}</div>
-        <table>
+      <div className="px-4 py-10 text-center flex flex-col justify-center items-center sm:p-6">
+        <h2 className="text-3xl font-bold mb-4 tracking-tight text-gray-900">
+          <a id="hours">{title}</a>
+        </h2>
+        <table className="md:w-1/2 text-gray-700">
           <thead className="sr-only">
             <tr>
               <th>Day of the Week</th>
