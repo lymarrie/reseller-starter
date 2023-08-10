@@ -93,8 +93,8 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
   const photoDivs = photoGallery.map((e) => (
     <div key={e.image.url} className="self-center px-2 hover:drop-shadow-lg">
       <a href={e.image.url} target="_blank" rel="noreferrer">
-        {/* <Image image={e.image} className="rounded-md" /> */}
-        <img src={e.image.url} className="rounded-md"></img>
+        <Image image={e.image} className="rounded-md" />
+        {/* <img src={e.image.url} className="rounded-md"></img> */}
       </a>
     </div>
   ));
