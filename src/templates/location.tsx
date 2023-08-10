@@ -23,17 +23,13 @@ import {
 import { isProduction } from "@yext/pages/util";
 import "../index.css";
 import Favicon from "../assets/images/yext-favicon.ico";
-import BannerImage from "../assets/images/yext-banner.png";
 import About from "../components/About";
 import Banner from "../components/Banner";
 import Carousel from "../components/Carousel";
-import ContactSection from "../components/ContactSection";
-import Details from "../components/Details";
 import Hours from "../components/Hours";
 import PageLayout from "../components/PageLayout";
-import EditTool from "../components/EditTool";
+import Schema from "../components/Schema";
 
-import { Image } from "@yext/react-components";
 
 
 /**
@@ -150,6 +146,7 @@ const Location: Template<TemplateRenderProps> = ({
 
   return (
     <>
+      <Schema data={document} />
       <PageLayout data={data}>
         <Banner name={name} photoGallery={photoGallery} />
         <About description={description} />
