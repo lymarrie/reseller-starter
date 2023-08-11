@@ -12,8 +12,8 @@ export interface HeaderProps {
 const navigation = [
   // { name: "Home", href: "/index.html" },
   { name: "About", href: "#about" },
-  { name: "Gallery", href: "#gallery" },
   { name: "Hours", href: "#hours" },
+  { name: "Gallery", href: "#gallery" },
   // { name: "Contact", href: "/index.html" },
   // { name: "About", href: "/about" },
 ];
