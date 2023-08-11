@@ -84,11 +84,11 @@ const Header = ({ data }: HeaderProps) => {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
-                className="h-14 w-auto"
-                src="https://cdn.fs.brandfolder.com/cache=expiry:604800/deY3VGFpSjC761Abjbfc"
-                alt=""
-              />
+              { data.logo ? (
+                <Image image={data.logo.image} layout="fixed" height={80} width={80} />
+                ) : (
+                  <img className="h-24 w-auto rounded-md" src="https://logoipsum.com/logoipsum.png" alt="" />
+              )}
             </a>
             <button
               type="button"
