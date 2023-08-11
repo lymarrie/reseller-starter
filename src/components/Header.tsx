@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { formatPhoneNumber } from "react-phone-number-input";
+import { Image } from "@yext/react-components";
 
 export interface HeaderProps {
   data?: any;
@@ -19,29 +20,36 @@ const navigation = [
 
 const Header = ({ data }: HeaderProps) => {
 
-  let phone, email;
+  // let phone, email;
 
-  if (data.mainPhone) { 
-    phone = data.mainPhone;
-  } else {
-    phone = "+12345678910";
-  };
+  let phone = data.mainPhone ? data.mainPhone : "+12345678910";
+  let email = data.emails?.[0] ?? "test@test.com";
 
-  if (data.emails) {
-    email = data.emails[0];
-  } else {
-    email = "test@yext.com";
-  }
+  // if (data.mainPhone) { 
+  //   phone = data.mainPhone;
+  // } else {
+  //   phone = "+12345678910";
+  // };
+
+  // if (data.emails) {
+  //   email = data.emails[0];
+  // } else {
+  //   email = "test@yext.com";
+  // }
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white">
+    <header className="bg-white" style={{background: `var(--backgroundColor)`}}>
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex items-center gap-x-12">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img className="h-14 w-auto" src="https://cdn.fs.brandfolder.com/cache=expiry:604800/deY3VGFpSjC761Abjbfc" alt="" />
+            { data.logo ? (
+              <Image image={data.logo.image} layout="fixed" height={80} width={80} />
+              ) : (
+                <img className="h-24 w-auto rounded-md" src="https://logoipsum.com/logoipsum.png" alt="" />
+            )}
           </a>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
@@ -117,88 +125,7 @@ const Header = ({ data }: HeaderProps) => {
         </Dialog.Panel>
       </Dialog>
     </header>
-  )
-
-  // return (
-  //   <Disclosure as="nav" className="bg-white shadow">
-  //     {({ open }) => (
-  //       <>
-  //         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-  //           <div className="flex h-24 justify-between">
-  //             <div className="flex">
-  //               <div className="-ml-2 mr-2 flex items-center md:hidden">
-  //                 {/* Mobile menu button */}
-  //                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black">
-  //                   <span className="sr-only">Open main menu</span>
-  //                   {open ? (
-  //                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-  //                   ) : (
-  //                     <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-  //                   )}
-  //                 </Disclosure.Button>
-  //               </div>
-  //               <div className="flex flex-shrink-0 items-center">
-  //                 <img
-  //                   className="block lg:hidden"
-  //                   src="https://cdn.fs.brandfolder.com/cache=expiry:604800/deY3VGFpSjC761Abjbfc"
-  //                   alt="Your Company"
-  //                   width="50"
-  //                   height="50"
-  //                 />
-  //                 <img
-  //                   className="hidden lg:block"
-  //                   src="https://cdn.fs.brandfolder.com/cache=expiry:604800/deY3VGFpSjC761Abjbfc"
-  //                   alt="Your Company"
-  //                   width="50"
-  //                   height="50"
-  //                 />
-  //               </div>
-  //               <div className="hidden md:ml-6 md:flex md:space-x-4">
-  //                 {navigation.map((link) => (
-  //                   <Cta
-  //                     key={link.href}
-  //                     buttonText={link.name}
-  //                     url={link.href}
-  //                     style="inline-flex items-center border-b-4 rounded-none border-transparent hover:border-black"
-  //                   />
-  //                 ))}
-  //               </div>
-  //             </div>
-  //             <div className="flex items-center space-x-5">
-  //               <Cta
-  //                 buttonText="Link 1"
-  //                 url="#"
-  //                 style="text-white bg-black shadow-md"
-  //               />
-  //               <Cta
-  //                 buttonText="Link 2"
-  //                 url="#"
-  //                 style="text-white bg-gray-600 shadow-md"
-  //               />
-  //             </div>
-  //           </div>
-  //         </div>
-
-  //         <Disclosure.Panel className="md:hidden">
-  //           <div className="space-y-1 pt-2 pb-3">
-  //             {navigation.map((link) => (
-  //               <Disclosure.Button
-  //                 key={link.href}
-  //                 as="a"
-  //                 href={link.href}
-  //                 className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
-  //               >
-  //                 {link.name}
-  //               </Disclosure.Button>
-  //             ))}
-  //           </div>
-  //         </Disclosure.Panel>
-  //       </>
-  //     )}
-  //   </Disclosure>
-  // );
-
-  
+  )  
 
 };
 

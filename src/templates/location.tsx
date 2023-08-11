@@ -55,10 +55,13 @@ export const config: TemplateConfig = {
       "description",
       "hours",
       "slug",
+      "logo",
       "services",
       "photoGallery",
       "paymentOptions",
       "emails",
+      "yextDisplayCoordinate",
+      "c_backgroundColor"
     ],
     // The entity language profiles that documents will be generated for.
     localization: {
@@ -66,7 +69,10 @@ export const config: TemplateConfig = {
       primary: false,
     },
     transform: {
-      replaceOptionValuesWithDisplayNames: ["paymentOptions"],
+      replaceOptionValuesWithDisplayNames: [
+        "paymentOptions",
+        "c_backgroundColor"
+      ],
     },
   },
 };
@@ -105,6 +111,13 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         },
       },
       {
+        type: "meta", // Meta Tag (og:image)
+        attributes: {
+          property: "og:image",
+          content: (document.photoGallery ? document.photoGallery[0].image.url : null),
+        },
+      },
+      {
         type: "link",
         attributes: {
           rel: "icon",
@@ -139,10 +152,13 @@ const Location: Template<TemplateRenderProps> = ({
     services,
     description,
     emails,
-    photoGallery
+    logo,
+    photoGallery,
+    yextDisplayCoordinate,
+    c_backgroundColor
   } = document;
 
-  const data = { mainPhone, emails }
+  const data = { mainPhone, emails, logo, c_backgroundColor }
 
   return (
     <>
@@ -150,7 +166,7 @@ const Location: Template<TemplateRenderProps> = ({
       <PageLayout data={data}>
         <Banner name={name} photoGallery={photoGallery} />
         <About description={description} />
-        {hours && <Hours title={"Hours of Operation"} hours={hours} />}
+        {hours && <Hours title={"Hours"} hours={hours} />}
         <Carousel title={"Gallery"} photoGallery={photoGallery}></Carousel>
       </PageLayout>
     </>
