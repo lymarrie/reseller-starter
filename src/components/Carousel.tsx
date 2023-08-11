@@ -91,7 +91,7 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
 //   console.log("photo gallery array after manipulation");
 //   console.log(photoGallery);
   const photoDivs = photoGallery.map((e) => (
-    <div key={e.image.url} className="self-center px-2 hover:drop-shadow-lg">
+    <div key={e.image.url} className="self-center hover:drop-shadow-lg sm:px-2">
       <a href={e.image.url} target="_blank" rel="noreferrer">
         <Image image={e.image} className="rounded-md" />
         {/* <img src={e.image.url} className="rounded-md"></img> */}
@@ -136,8 +136,8 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
     initialSlide: 0,
     lazyLoad: true, 
     swipeToSlide: false,
-    prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow className="" />,
+    nextArrow: <NextArrow className="" />,
     responsive: [
       {
         breakpoint: 1280,
@@ -166,7 +166,8 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          swipeToSlide: true
+          swipeToSlide: true,
+          arrows: false
         },
       }
     ],
@@ -181,7 +182,7 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
           <h2 className="section text-3xl text-center tracking-tight font-bold">
             <a id="gallery">{title}</a>
           </h2>
-          <Slider {...settings} className="p-5 mx-4 drop-shadow">{photoDivs}</Slider> 
+          <Slider {...settings} className="drop-shadow sm:px-3 sm:mx-3  md:px-5">{photoDivs}</Slider> 
         </div>
     </>
   );

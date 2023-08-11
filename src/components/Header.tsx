@@ -112,7 +112,7 @@ const Header = ({ data }: HeaderProps) => {
                   </a>
                 ))}
               </div>
-              <div className="py-6 space-y-4">
+              <div className="py-6 space-y-4 flex flex-col">
                 <a href={`tel:${phone}`} className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700 ">
                       {formatPhoneNumber(phone)}
                 </a>
