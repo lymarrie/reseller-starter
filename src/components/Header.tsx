@@ -4,6 +4,7 @@ import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { formatPhoneNumber } from "react-phone-number-input";
 import { Image } from "@yext/react-components";
+import { Link } from "@yext/sites-components";
 
 export interface HeaderProps {
   data?: any;
@@ -53,9 +54,17 @@ const Header = ({ data }: HeaderProps) => {
           </a>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="tracking-tight font-bold leading-6 text-gray-800">
+              // <a key={item.name} href={item.href} className="tracking-tight font-bold leading-6 text-gray-800">
+              //   {item.name}
+              // </a>
+              <Link 
+                href={item.href}
+                key={item.name}
+                className="tracking-tight font-bold leading-6 text-gray-800"
+                eventName={`cta Click_${item.name}`}
+                >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -70,12 +79,26 @@ const Header = ({ data }: HeaderProps) => {
           </button>
         </div>
         <div className="hidden lg:flex justify-around space-x-8">
-          <a href={`tel:${phone}`} className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700 ">
+          {/* <a href={`tel:${phone}`} className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700 ">
             {formatPhoneNumber(phone)}
-          </a>
-          <a href={`mailto: ${email}`} className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700">
+          </a> */}
+          <Link
+            href={`tel:${phone}`}
+            className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700"
+            eventName={`phoneCall`}
+          >
+            {formatPhoneNumber(phone)}
+          </Link>
+          {/* <a href={`mailto: ${email}`} className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700">
             {email}
-          </a>
+          </a> */}
+          <Link
+            href={`mailto: ${email}`}
+            className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700"
+            eventName={`email`}
+          >
+            {email}
+          </Link>
         </div>
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -103,22 +126,44 @@ const Header = ({ data }: HeaderProps) => {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 {navigation.map((item) => (
-                  <a
-                    key={item.name}
+                  // <a
+                  //   key={item.name}
+                  //   href={item.href}
+                  //   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  // >
+                  //   {item.name}
+                  // </a>
+                  <Link 
                     href={item.href}
+                    key={item.name}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
+                    eventName={`cta Click_${item.name}`}
+                    >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
               <div className="py-6 space-y-4 flex flex-col">
-                <a href={`tel:${phone}`} className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700 ">
+                {/* <a href={`tel:${phone}`} className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700 ">
                       {formatPhoneNumber(phone)}
-                </a>
-                <a href={`mailto: ${email}`} className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700">
+                </a> */}
+                <Link
+                  href={`tel:${phone}`}
+                  className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700"
+                  eventName={`phoneCall`}
+                >
+                  {formatPhoneNumber(phone)}
+                </Link>                
+                {/* <a href={`mailto: ${email}`} className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700">
                   {email}
-                </a>
+                </a> */}
+                <Link
+                  href={`mailto: ${email}`}
+                  className="tracking-tight font-bold leading-6 text-gray-900 hover:text-gray-700"
+                  eventName={`email`}
+                >
+                  {email}
+                </Link>
               </div>
             </div>
           </div>
