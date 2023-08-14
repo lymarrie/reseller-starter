@@ -163,7 +163,7 @@ const Location: Template<TemplateRenderProps> = ({
   return (
     <>
       <Schema data={document} />
-      <PageLayout data={data}>
+      <PageLayout data={data} templateData={{__meta, document}}>
         <Banner name={name} photoGallery={photoGallery} />
         <About description={description} />
         {hours && <Hours title={"Hours"} hours={hours} />}
