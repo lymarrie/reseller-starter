@@ -53,21 +53,6 @@
     },
     {
       "entityType": "product",
-      "disabled": true
-    },
-    {
-      "entityType": "ce_menu",
-      "defaultFieldEligibilityGroup": "ce_menu.default",
-      "disabled": false
-    },
-    {
-      "entityType": "ce_site",
-      "defaultFieldEligibilityGroup": "ce_site.default",
-      "disabled": false
-    },
-    {
-      "entityType": "ce_menuItem",
-      "defaultFieldEligibilityGroup": "ce_menuItem.default",
       "disabled": false
     },
     {
