@@ -60,8 +60,7 @@ export const config: TemplateConfig = {
       "photoGallery",
       "paymentOptions",
       "emails",
-      "yextDisplayCoordinate",
-      "c_backgroundColor"
+      "yextDisplayCoordinate"
     ],
     // The entity language profiles that documents will be generated for.
     localization: {
@@ -70,8 +69,7 @@ export const config: TemplateConfig = {
     },
     transform: {
       replaceOptionValuesWithDisplayNames: [
-        "paymentOptions",
-        "c_backgroundColor"
+        "paymentOptions"
       ],
     },
   },
@@ -154,11 +152,10 @@ const Location: Template<TemplateRenderProps> = ({
     emails,
     logo,
     photoGallery,
-    yextDisplayCoordinate,
-    c_backgroundColor
+    yextDisplayCoordinate
   } = document;
 
-  const data = { mainPhone, emails, logo, c_backgroundColor }
+  const data = { mainPhone, emails, logo }
 
   return (
     <>
