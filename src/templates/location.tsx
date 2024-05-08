@@ -41,7 +41,7 @@ export const config: TemplateConfig = {
     // Defines the scope of entities that qualify for this stream.
     // You can use entityTypes, savedFilterIds, and/or entityIds
     filter: {
-      entityIds: [YEXT_PUBLIC_LOCATION_ENTITY_ID],
+      entityIds: [import.meta.env.YEXT_PUBLIC_LOCATION_ENTITY_ID],
     },
     // Specifies the exact data that each generated document will contain.
     // This data is passed in directly as props to the default exported function.
@@ -64,7 +64,7 @@ export const config: TemplateConfig = {
     ],
     // The entity language profiles that documents will be generated for.
     localization: {
-      locales: [YEXT_PUBLIC_LOCATION_LOCALE_CODE],
+      locales: [import.meta.env.YEXT_PUBLIC_LOCATION_LOCALE_CODE], 
       primary: false,
     },
     transform: {
